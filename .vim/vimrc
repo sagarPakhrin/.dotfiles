@@ -17,7 +17,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/syntastic'
 
 "For Javscript
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 
 
@@ -28,4 +28,5 @@ call plug#end()
 
 source ~/.vim/startup/settings.vim
 source ~/.vim/startup/mappings.vim
+source ~/.vim/startup/compileAndRun.vim
 source ~/.vim/startup/pluginSettings.vim
