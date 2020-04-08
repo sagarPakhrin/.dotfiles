@@ -13,8 +13,8 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "Mappings for tabs
 nnoremap tn :tabnew<space>
-nnoremap tk :tabnext<space>
-nnoremap tj :tabprev<space>
+nnoremap tk :tabnext<cr>
+nnoremap tj :tabprev<cr>
 
 "Start NERDTree 
 nnoremap nt :NERDTree<cr>
