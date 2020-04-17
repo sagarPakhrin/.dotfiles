@@ -173,7 +173,7 @@ bindsym $mod+shift+x exec i3lock --color=2f4f4f
 
 
 #assigning google chrome to window 9
-assign [class="Google-chrome"] 9
+# assign [class="Google-chrome"] 9
 assign [class="Firefox"] 8
 
 #starting google chrome when preseed mode + c

@@ -18,3 +18,5 @@ nnoremap tj :tabprev<cr>
 
 "Start NERDTree 
 nnoremap nt :NERDTree<cr>
+
+inoremap j; <esc>A;
