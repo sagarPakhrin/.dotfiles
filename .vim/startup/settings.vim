@@ -23,3 +23,6 @@ set noswapfile
 
 set pastetoggle=<F10>
 set cursorline "highlights the current line
+
+"Indentation guide
+set cursorcolumn
