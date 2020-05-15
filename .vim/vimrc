@@ -22,7 +22,7 @@ Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 
 "For Colors
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 

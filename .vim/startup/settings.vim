@@ -2,6 +2,7 @@ set t_Co=256
 set nocompatible
 set mouse=a
 
+syntax enable
 set splitbelow
 set splitright
 set incsearch

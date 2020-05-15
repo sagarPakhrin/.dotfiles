@@ -1,6 +1,5 @@
 "For Colors
-colorscheme onehalfdark
-let g:airline_theme='onehalfdark'
+colorscheme dracula
  
 "For fzf 
 noremap <Space>h :Hist<CR>
