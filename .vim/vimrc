@@ -23,7 +23,7 @@ Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 
 "For Colors
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'lifepillar/vim-solarized8'
 
 call plug#end()
 
