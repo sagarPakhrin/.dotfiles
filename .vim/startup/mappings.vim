@@ -20,3 +20,14 @@ nnoremap tj :tabprev<cr>
 nnoremap nt :NERDTree<cr>
 
 inoremap j; <esc>A;
+
+"Mappings to go to defination(Required YouCompleteMe )
+nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
+nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <silent> <Leader>rr :YcmCompleter RefactorRename<space>
+
+"Mappings for GitBlame
+nnoremap <leader>gs :G<CR>
+nnoremap <leader>gj :diffget //3<CR>
+nnoremap <leader>gf :diffget //2<CR>
