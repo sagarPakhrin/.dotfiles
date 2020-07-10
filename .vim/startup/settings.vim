@@ -6,15 +6,17 @@ syntax enable
 set splitbelow
 set splitright
 set incsearch
-set hlsearch
+"set hlsearch
 
 set number
 set relativenumber
 set showcmd
 
+set nowrap
+
 filetype indent on
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 
 "Preventing swap files
@@ -27,3 +29,5 @@ set cursorline "highlights the current line
 
 "Indentation guide
 set cursorcolumn
+
+autocmd BufNewFile,BufRead *.blade.php set ft=html

@@ -18,6 +18,21 @@ map <Leader>h <Plug>(easymotion-linebackward)
 "Easymotion
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion"
 
+"NERDTree
+"let NERDTreeMinimalUI = 1
+"let NERDTreeDirArrows = 1
+"let NERDTreeHijackNetrw = 1
+
+"To mirror NERDTree on all tabs
+function! ToggleNERDTree()
+    NERDTreeToggle
+    silent NERDTreeMirror
+endfunction
+
+
+let g:syntastic_sass_checkers=["sasslint"]
+let g:syntastic_scss_checkers=["sasslint"]
+
 "YCM
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1

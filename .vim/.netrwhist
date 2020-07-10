@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/sagar/Projects/tailwind/public/build'
+let g:netrw_dirhist_9='/home/sagar/Projects/tailwind/public'
+let g:netrw_dirhist_8='/var/www/html/introcept/wp-content/themes/globaly/resources'
+let g:netrw_dirhist_7='/home/sagar/Projects/Globaly-Website'
+let g:netrw_dirhist_6='/var/www/html/introcept/wp-content/themes/globaly'
+let g:netrw_dirhist_5='/var/www/html/globaly/wp-content/themes/globaly/config'
+let g:netrw_dirhist_4='/var/www/html/globaly/wp-content/themes/globaly/resources/assets'
+let g:netrw_dirhist_3='/home/sagar/Projects/testTheme/site/web/wp'
+let g:netrw_dirhist_2='/home/sagar/Downloads/blog-site-template'
 let g:netrw_dirhist_1='/home/sagar/Projects/taskmanagement/src/tasks'

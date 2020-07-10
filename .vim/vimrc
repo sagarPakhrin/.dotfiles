@@ -16,14 +16,18 @@ Plug 'mattn/emmet-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
+Plug 'tomtom/tcomment_vim'
 
 "For Javscript
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 
+"Plug 'gcorne/vim-sass-lint'
+
 
 "For Colors
 Plug 'lifepillar/vim-solarized8'
+"Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
