@@ -138,5 +138,6 @@ export EDITOR="$VISUAL"
 # Custom aliases
 . ~/dotfiles/system/.aliases
 . ~/dotfiles/system/.functions
+. ~/Projects/globaly/.env
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
