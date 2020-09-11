@@ -25,6 +25,7 @@ inoremap j; <esc>A;
 nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <silent> <Leader>gi :YcmCompleter GoToImplementation<CR>
 nnoremap <silent> <Leader>rr :YcmCompleter RefactorRename<space>
 
 "Mappings for GitBlame

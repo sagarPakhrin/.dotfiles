@@ -1,6 +1,10 @@
 "For Colors
+
+syntax enable
 set background=dark
 colorscheme solarized8
+set t_Co=16
+let g:solarized_termcolors=256
 
 
 "For fzf 

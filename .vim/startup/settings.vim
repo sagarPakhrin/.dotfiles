@@ -31,3 +31,8 @@ set cursorline "highlights the current line
 set cursorcolumn
 
 autocmd BufNewFile,BufRead *.blade.php set ft=html
+
+" To Enable NerdTree Mirror 
+" autocmd VimEnter * NERDTree
+" autocmd BufEnter * NERDTreeMirror
+" autocmd VimEnter * wincmd w
