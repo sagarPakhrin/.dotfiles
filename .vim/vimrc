@@ -19,11 +19,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tomtom/tcomment_vim'
 
 "For Javscript
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-
-
-"Plug 'gcorne/vim-sass-lint'
-
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 "For Colors
 Plug 'lifepillar/vim-solarized8'

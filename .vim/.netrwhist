@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/sagar/Practise/typeprax'
+let g:netrw_dirhist_3='/home/sagar/dotfiles/.vim/colors'
 let g:netrw_dirhist_2='/home/sagar/Practise/typeprax/typeprax/src/migration'
 let g:netrw_dirhist_1='/home/sagar/Projects/superadmin/server'
 let g:netrw_dirhist_0='/home/sagar/Projects/globaly/site/web/app/themes/globaly/dist'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_8='/home/sagar/Projects/saleor-platform/saleor/saleor/core/m
 let g:netrw_dirhist_7='/home/sagar/Projects/ShareBooks/frontend/src/compoments/CommentForm'
 let g:netrw_dirhist_6='/home/sagar/Projects/superadmin/docker/nginx'
 let g:netrw_dirhist_5='/home/sagar/Projects/superadmin'
-let g:netrw_dirhist_4='/home/sagar/Projects/superadmin/docker'
-let g:netrw_dirhist_3='/var/www/html/globaly/wp-content/themes/globaly/.git'

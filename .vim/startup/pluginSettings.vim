@@ -91,3 +91,10 @@ function! ExpandSnippetOrCarriageReturn()
     endif
 endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+
+" Prettier setttings
+" let g:prettier#exec_cmd_path = "/home/sagar/dotfiles/.vim/plugged/vim-prettier/node_modules/.bin/prettier"
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+
+let g:gitgutter_highlight_lines = 1
