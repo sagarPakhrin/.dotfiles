@@ -96,5 +96,13 @@ inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" 
 " let g:prettier#exec_cmd_path = "/home/sagar/dotfiles/.vim/plugged/vim-prettier/node_modules/.bin/prettier"
 " let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#single_quote = 'false'
+" let g:gitgutter_highlight_lines = 1
+"
+nnoremap <leader>ff :YcmCompleter FixIt<CR>
 
-let g:gitgutter_highlight_lines = 1
+
+" Vue
+let g:vim_vue_plugin_load_full_syntax = 1
