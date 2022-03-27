@@ -3,7 +3,7 @@
 ## Installation
 
 _clone the repository_
-git clone git@github.com/sagarPakhrin/.dotfiles`
+`git clone git@github.com/sagarPakhrin/.dotfiles`
 
 ### Manual Setup
 
