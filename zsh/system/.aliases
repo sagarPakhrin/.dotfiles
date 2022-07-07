@@ -1,1 +1,2 @@
 alias srm='sudo rm -r '
+alias docker-compose='docker compose'
