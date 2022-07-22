@@ -22,7 +22,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -71,3 +71,20 @@ for _, server in pairs(servers) do
     settings = settings
   })
 end
+
+-- Auto format
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  callback = function()
+      vim.lsp.buf.formatting_seq_sync()
+  end,
+})
+
+-- Organize import
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  callback = function()
+      vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})
+  end,
+})
+
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_seq_sync()]]
+-- vim.cmd [[autocmd BufWritePre *.jsx,*.tsx,*.ts,*.js lua vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})]]

@@ -4,3 +4,4 @@ if not status_ok then
 end
 
 require ("sagar.lsp.configs")
+require ("sagar.lsp.null-ls")
