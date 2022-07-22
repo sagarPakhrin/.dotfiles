@@ -50,13 +50,15 @@ return packer.startup(function(use)
   -- call plug#begin()
   --
   use({ 'tpope/vim-fugitive' })
-  use({ 'jiangmiao/auto-pairs' })
   use({ 'tmhedberg/matchit' })
   use({ 'tpope/vim-surround' })
   use({ 'airblade/vim-gitgutter' })
   use({ 'easymotion/vim-easymotion' })
   use({ 'tomtom/tcomment_vim' })
   use({ "kyazdani42/nvim-tree.lua" })
+
+  -- Autopairs
+  use({ "windwp/nvim-autopairs" })
 
   -- Colors and icons
   use({ "kyazdani42/nvim-web-devicons" })
@@ -65,18 +67,26 @@ return packer.startup(function(use)
   use({ 'morhetz/gruvbox' })
 
   -- LSP stuffs
-  use({ 'neovim/nvim-lspconfig'  })-- Configurations for Nvim LSP
-  use({ 'williamboman/nvim-lsp-installer'  })-- Configurations for Nvim LSP
-  -- use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+  use({ 'neovim/nvim-lspconfig' }) -- Configurations for Nvim LSP
+  use({ 'williamboman/nvim-lsp-installer' }) -- Configurations for Nvim LSP
+  use({ 'nvim-treesitter/nvim-treesitter' })
   use({ 'nvim-telescope/telescope.nvim' })
 
   -- Linters and formatters
   use({ 'jose-elias-alvarez/null-ls.nvim' })
   use({ 'mfussenegger/nvim-lint' })
 
+  -- Completion plugins
+  use({ 'L3MON4D3/LuaSnip' })
+  use({ 'saadparwaiz1/cmp_luasnip' })
+  use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
+  use({ "hrsh7th/cmp-buffer" }) -- buffer completions
+  use({ "hrsh7th/cmp-path" }) -- path completions
+  use({ "hrsh7th/cmp-nvim-lsp" })
+  use({ "hrsh7th/cmp-nvim-lua" })
 
 
-  use({ "akinsho/toggleterm.nvim", tag = 'v2.*' })
+  -- use({ "akinsho/toggleterm.nvim", tag = 'v2.*' })
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
