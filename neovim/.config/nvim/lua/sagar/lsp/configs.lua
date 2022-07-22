@@ -1,6 +1,6 @@
 local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 if not status_ok then
-	return
+  return
 end
 
 local lspconfig = require("lspconfig")
@@ -8,13 +8,13 @@ local lspconfig = require("lspconfig")
 local servers = { "jsonls", "sumneko_lua", "tsserver" }
 
 lsp_installer.setup({
-	ensure_installed = servers,
+  ensure_installed = servers,
 })
 
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -28,7 +28,7 @@ local on_attach = function(_, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
@@ -59,32 +59,32 @@ for _, server in pairs(servers) do
       Lua = {
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = {'vim'},
+          globals = { 'vim' },
         },
       },
     }
-	end
+  end
+
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
   lspconfig[server].setup({
     on_attach = on_attach,
     flags = lsp_flags,
-    settings = settings
+    settings = settings,
+    capabilities = capabilities
   })
 end
 
 -- Auto format
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   callback = function()
-      vim.lsp.buf.formatting_seq_sync()
+    vim.lsp.buf.formatting_seq_sync()
   end,
 })
 
 -- Organize import
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   callback = function()
-      vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})
+    vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
   end,
 })
-
--- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_seq_sync()]]
--- vim.cmd [[autocmd BufWritePre *.jsx,*.tsx,*.ts,*.js lua vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})]]

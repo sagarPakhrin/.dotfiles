@@ -1,7 +1,6 @@
-
 require('sagar.options')
 require('sagar.lsp')
--- require('sagar.cmp')
+require('sagar.cmp')
 require('sagar.telescope')
 require('sagar.mappings')
 require('sagar.plugins')
