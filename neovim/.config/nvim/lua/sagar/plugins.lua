@@ -67,9 +67,8 @@ return packer.startup(function(use)
   -- LSP stuffs
   use({ 'neovim/nvim-lspconfig'  })-- Configurations for Nvim LSP
   use({ 'williamboman/nvim-lsp-installer'  })-- Configurations for Nvim LSP
-  
   -- use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
-  
+  use({ 'nvim-telescope/telescope.nvim' })
   use({ "akinsho/toggleterm.nvim", tag = 'v2.*', config = function() require("toggleterm").setup() end })
 
   if PACKER_BOOTSTRAP then

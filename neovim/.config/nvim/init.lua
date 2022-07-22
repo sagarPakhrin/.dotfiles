@@ -2,7 +2,7 @@
 require('sagar.options')
 require('sagar.lsp')
 -- require('sagar.cmp')
--- require('sagar.telescope')
+require('sagar.telescope')
 require('sagar.mappings')
 require('sagar.plugins')
 require('sagar.colorscheme')
