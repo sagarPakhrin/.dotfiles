@@ -1,0 +1,10 @@
+
+require('sagar.options')
+require('sagar.lsp')
+-- require('sagar.cmp')
+-- require('sagar.telescope')
+require('sagar.mappings')
+require('sagar.plugins')
+require('sagar.colorscheme')
+-- require('sagar.nvim-treesitter')
+require('sagar.nvim-tree')
