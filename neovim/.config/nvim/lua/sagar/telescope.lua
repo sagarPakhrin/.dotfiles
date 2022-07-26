@@ -103,6 +103,7 @@ telescope.setup {
   -- },
 }
 
+keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<space>ff", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<space>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
 -- nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>

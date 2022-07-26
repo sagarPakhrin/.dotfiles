@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -112,3 +112,7 @@ fi
 
 # Shortcuts
 bindkey '^ ' autosuggest-accept
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
