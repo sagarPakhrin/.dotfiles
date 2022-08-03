@@ -53,18 +53,23 @@ return packer.startup(function(use)
   use({ 'tmhedberg/matchit' })
   use({ 'tpope/vim-surround' })
   use({ 'airblade/vim-gitgutter' })
+  use({ 'lewis6991/gitsigns.nvim' })
   use({ 'easymotion/vim-easymotion' })
   use({ 'tomtom/tcomment_vim' })
   use({ "kyazdani42/nvim-tree.lua" })
 
   -- Autopairs
-  use({ "windwp/nvim-autopairs" })
+  -- use({ "windwp/nvim-autopairs" })
+  use({ "jiangmiao/auto-pairs" })
 
   -- Colors and icons
   use({ "kyazdani42/nvim-web-devicons" })
   use({ 'shaunsingh/solarized.nvim' })
   use({ 'folke/tokyonight.nvim' })
   use({ 'morhetz/gruvbox' })
+
+  -- buffers
+  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
 
   -- LSP stuffs
   use({ 'neovim/nvim-lspconfig' }) -- Configurations for Nvim LSP
@@ -84,9 +89,6 @@ return packer.startup(function(use)
   use({ "hrsh7th/cmp-path" }) -- path completions
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
-
-
-  -- use({ "akinsho/toggleterm.nvim", tag = 'v2.*' })
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
