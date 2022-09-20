@@ -5,7 +5,7 @@ end
 
 local lspconfig = require("lspconfig")
 
-local servers = { "jsonls", "sumneko_lua", "tsserver" }
+local servers = { "jsonls", "sumneko_lua", "tsserver", "tailwindcss" }
 
 lsp_installer.setup({
   ensure_installed = servers,
@@ -75,15 +75,9 @@ for _, server in pairs(servers) do
   })
 end
 
--- Auto format
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  callback = function()
-    vim.lsp.buf.formatting_seq_sync()
-  end,
-})
-
 -- Organize import
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  -- pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   callback = function()
     vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
   end,
