@@ -45,38 +45,79 @@ function M.setup()
       end,
     })
 
-    use({ 
+    use({
       "windwp/nvim-autopairs",
-      config = function() 
-        require("nvim-autopairs").setup {} 
+      config = function()
+        require("nvim-autopairs").setup {}
       end
     })
-
-    -- LSP stuffs
-    use({ 
-      'neovim/nvim-lspconfig',
-      opt = true,
-      event = "BufReadPre",
-    }) 
-
-    -- Configurations for Nvim LSP
-    use({ 'williamboman/nvim-lsp-installer' }) -- Configurations for Nvim LSP
-    use({ 
-      'nvim-treesitter/nvim-treesitter',
-      config = function() 
-        require("config.nvim-tree")
-      end
-    })
-    use({ 'nvim-telescope/telescope.nvim' })
-
 
 
     -- Easy motion
     use({ "easymotion/vim-easymotion" })
     use({ "andymass/vim-matchup" })
+      
+    -- Git
+    use({ 'tpope/vim-fugitive' })
+    use({ 'tpope/vim-surround' })
+    use({ 'airblade/vim-gitgutter' })
+    use({ 'tomtom/tcomment_vim' })
 
-    use { "kyazdani42/nvim-web-devicons"}
-    use { "kyazdani42/nvim-tree.lua"}
+
+    -- LSP stuffs
+    use({
+      'neovim/nvim-lspconfig',
+      opt = true,
+      event = "BufReadPre",
+      config = function()
+        require("config.lsp")
+      end
+    })
+
+    -- Configurations for Nvim LSP
+    use({ 'williamboman/nvim-lsp-installer' }) -- Configurations for Nvim LSP
+    use({
+      'nvim-treesitter/nvim-treesitter',
+      config = function()
+        require("config.nvim-tree")
+      end
+    })
+    use({ 'nvim-telescope/telescope.nvim' })
+
+    -- Completion plugins
+    use({
+      "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
+      opt = true,
+      config = function()
+        require("config.cmp")
+      end,
+      wants = { "LuaSnip" },
+      requires = {
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "ray-x/cmp-treesitter",
+        "hrsh7th/cmp-cmdline",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-calc",
+        "f3fora/cmp-spell",
+        "hrsh7th/cmp-emoji",
+        {
+          "L3MON4D3/LuaSnip",
+          wants = "friendly-snippets",
+          config = function()
+            require("config.luasnip").setup()
+          end,
+        },
+        "rafamadriz/friendly-snippets",
+        disable = false,
+      },
+    })
+
+    use { "kyazdani42/nvim-web-devicons" }
+    use { "kyazdani42/nvim-tree.lua" }
 
 
 
