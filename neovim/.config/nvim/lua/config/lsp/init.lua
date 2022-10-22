@@ -1,15 +1,6 @@
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
-if not status_ok then
-  return
-end
-
 local lspconfig = require("lspconfig")
 
-local servers = { "jsonls", "sumneko_lua", "tsserver" }
-
-lsp_installer.setup({
-  ensure_installed = servers,
-})
+local servers = { "jsonls", "sumneko_lua", "tsserver", "tailwindcss" }
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -95,4 +86,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
   end,
 })
-

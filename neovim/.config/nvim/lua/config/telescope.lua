@@ -2,6 +2,15 @@ local telescope = require "telescope"
 
 local actions = require "telescope.actions"
 
+local opts = { noremap = true, silent = true }
+local map = vim.api.nvim_set_keymap
+
+-- Nvim tree
+
+map("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
+map("n", "<space>ff", "<cmd>Telescope find_files<cr>", opts)
+map("n", "<space>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", opts)
+
 telescope.setup {
   defaults = {
     prompt_prefix = " ",

@@ -6,6 +6,10 @@ function M.setup()
 
   -- packer.nvim configuration
   local conf = {
+    profile = {
+      enable = true,
+      threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+    },
     display = {
       open_fn = function()
         return require("packer.util").float { border = "rounded" }
@@ -74,8 +78,20 @@ function M.setup()
       end
     })
 
-    -- Configurations for Nvim LSP
-    use({ 'williamboman/nvim-lsp-installer' }) -- Configurations for Nvim LSP
+    use({
+      "williamboman/mason.nvim",
+      config = function()
+        require("config.manson")
+      end
+    })
+
+    -- TODO: setup lsp,mason and mason-lspconfig all together
+    -- use({
+    --   "williamboman/mason.nvim",
+    --   "williamboman/mason-lspconfig.nvim",
+    --   "neovim/nvim-lspconfig",
+    -- })
+
     use({
       'nvim-treesitter/nvim-treesitter',
       config = function()

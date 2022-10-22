@@ -47,31 +47,3 @@ map("n", "<C-l>", "<C-w>l", opts)
 
 map("n", "<leader>ev", ":vsp ~/.config/nvim/init.lua<cr>", opts)
 map("n", "<leader>sv", ":source $MYVIMRC<cr>", opts)
-
--- -- Move text up and down
--- map("n", "nt", ":NERDTree<cr>", opts)
-  
--- map("n", "<space>f", ":Files<cr>", opts)
---
---
--- -- " LSP config (the mappings used in the default file don't quite work right)
--- -- nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
--- -- nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
--- -- nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
--- -- nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
--- -- nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
--- -- nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
--- -- nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
--- -- nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
---
---
--- map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
--- map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
--- map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
--- map("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
--- map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
--- map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
--- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format({ async = true })' ]]
--- map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
---
---
