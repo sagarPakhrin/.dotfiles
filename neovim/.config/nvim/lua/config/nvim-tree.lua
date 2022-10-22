@@ -8,7 +8,6 @@ if not config_status_ok then
   return
 end
 
-local expr_opts = { noremap = true, expr = true, silent = true }
 local opts = { noremap = true, silent = true }
 local map = vim.api.nvim_set_keymap
 

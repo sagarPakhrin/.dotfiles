@@ -56,7 +56,7 @@ function M.setup()
     -- Easy motion
     use({ "easymotion/vim-easymotion" })
     use({ "andymass/vim-matchup" })
-      
+
     -- Git
     use({ 'tpope/vim-fugitive' })
     use({ 'tpope/vim-surround' })
@@ -82,7 +82,15 @@ function M.setup()
         require("config.nvim-tree")
       end
     })
-    use({ 'nvim-telescope/telescope.nvim' })
+
+    -- telescope
+    use({
+      'nvim-telescope/telescope.nvim',
+      config = function()
+        require("config.telescope")
+      end
+    })
+
 
     -- Completion plugins
     use({
