@@ -1,2 +1,5 @@
 alias srm='sudo rm -r '
 alias docker-compose='docker compose'
+alias k='kubectl'
+alias kc='kubectx'
+alias kn='kubens'

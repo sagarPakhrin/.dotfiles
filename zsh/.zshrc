@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker-compose zsh-autosuggestions git-flow)
+plugins=(git docker-compose zsh-autosuggestions git-flow git-flow-completion)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,15 +100,13 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Alises
 . ~/.dotfiles/zsh/system/.aliases
 . ~/.dotfiles/zsh/system/.functions
 
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Alises
-. ~/.dotfiles/zsh/system/.aliases
 
 # Shortcuts
 bindkey '^ ' autosuggest-accept
