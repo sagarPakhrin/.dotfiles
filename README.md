@@ -30,15 +30,17 @@ stow -vSt ~ zsh
 # ...
 ```
 
-## Neovim 
+## Neovim
 
 I've only added minimum configurations to get started with neovim. with lsp support.  
 Additional capabilities include:
+
 - Automatic imports
 - Format on save ( prettier )
 - Organize imports
 
 ### Installation
+
 ```bash
 sudo apt install neovim
 
@@ -48,25 +50,28 @@ stow -vSt ~ zsh
 
 ### Post installation steps
 
-*Launch neovim*  
+_Launch neovim_  
 `neovim`
 
-*Install neovim plugins with packer*  
+_Install neovim plugins with packer_  
 `:PackerInstall`
 
+> Currrently lsp-config and mason has not be confirured install lsp servers automatically:  
+> To install lsp servers manually, execute `:Mason` and install desired servers.
 
-> :exclamation: **Currrently lsp-config and mason has not be confirured install lsp servers automatically**: To install
-> lsp servers manually, run `:Mason` and install desired servers.
+<br/>
+If you want to install additional lsp servers, add additional servers to the servers table in
+`~/.dotfiles/neovim/.config/nvim/lua/config/lsp/init.lua`
 
-**If you want to install additional lsp servers, add additional servers to the servers table in
-`~/.dotfiles/neovim/.config/nvim/lua/config/lsp/init.lua`  **
 ```lua
 local servers = { "jsonls", "sumneko_lua", "tsserver", "tailwindcss", ... }
 ```
 
-For telescope to work better, install these plugins
-`bash
+### Additional packages
+
+Telescope seems to slow when configurations are added to ignore folders like `node_modules`, instead install these plugins on your system and telescope will pick these up and ignore everyting in .gitignore
+
+```bash
 sudo apt install fd-find
 sudo apt install ripgrep
-`
-
+```
