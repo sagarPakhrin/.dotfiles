@@ -1,5 +1,7 @@
 local lspconfig = require("lspconfig")
 
+require("config.lsp.handler").setup()
+
 local servers = { "jsonls", "sumneko_lua", "tsserver", "tailwindcss" }
 
 -- Mappings.

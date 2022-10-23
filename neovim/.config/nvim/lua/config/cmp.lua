@@ -49,7 +49,8 @@ local kind_icons = {
 cmp.setup({
   snippet = {
     expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      luasnip.lsp_expand(args.body) -- For `luasnip` users. if this this line causes error, replace with the one below
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   -- window = {
@@ -105,4 +106,3 @@ cmp.setup({
     { name = 'buffer' },
   })
 })
-
