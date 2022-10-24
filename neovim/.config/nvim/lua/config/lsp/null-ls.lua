@@ -26,7 +26,7 @@ function M.setup()
   null_ls.setup({
     debug = false,
     sources = {
-      builtins.formatting.prettier.with({ "--jsx-single-quote" }),
+      builtins.formatting.prettier.with({extra_args = { "--jsx-single-quote=false", "--tab-width=2"}}),
       builtins.formatting.stylua,
       builtins.diagnostics.eslint,
       builtins.completion.spell,
