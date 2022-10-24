@@ -2,6 +2,7 @@
 local options = {
   termguicolors = true,
   backup = false,
+  writebackup = false,
   mouse = 'a',
   hlsearch = true,
   splitbelow = true,
@@ -21,8 +22,8 @@ local options = {
   clipboard = "unnamed", -- Access system clipboard
   ignorecase = true, --Case insensitive searching unless /C or capital in search
   updatetime = 250, --Decrease update time
-  signcolumn = "yes" -- Always show sign column
-  -- undofile = true --Save undo history
+  signcolumn = "yes", -- Always show sign column
+  undofile = false --Save undo history
 }
 
 for k, v in pairs(options) do

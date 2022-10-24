@@ -77,6 +77,14 @@ function M.setup()
         require("config.lsp")
       end
     })
+    -- formatters and linters
+    use({
+      'jose-elias-alvarez/null-ls.nvim',
+      config = function()
+        require("config.lsp.null-ls").setup()
+      end
+    })
+
 
     use({
       "williamboman/mason.nvim",

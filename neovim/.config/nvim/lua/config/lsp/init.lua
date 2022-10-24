@@ -75,12 +75,12 @@ for _, server in pairs(servers) do
   })
 end
 
--- Auto format
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  callback = function()
-    vim.lsp.buf.formatting_seq_sync()
-  end,
-})
+-- -- Auto format
+-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--   callback = function()
+--     vim.lsp.buf.formatting_seq_sync()
+--   end,
+-- })
 
 -- Organize import
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
