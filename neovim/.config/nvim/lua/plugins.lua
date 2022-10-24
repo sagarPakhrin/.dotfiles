@@ -41,18 +41,30 @@ function M.setup()
     use({ "wbthomason/packer.nvim" })
     use({ "nvim-lua/plenary.nvim", module = "plenary" })
 
-    -- Colorscheme
     use({
-      "sainnhe/everforest",
+      'nvim-treesitter/nvim-treesitter',
       config = function()
-        vim.cmd "colorscheme everforest"
+        require("config.treesitter")
+      end
+    })
+
+    -- Colorscheme
+
+    use({
+      "folke/tokyonight.nvim",
+      config = function()
+        vim.cmd "colorscheme tokyonight"
       end,
     })
 
     use({
       "windwp/nvim-autopairs",
+      -- wants = { "windwp/nvim-ts-autotag" },
+      requires = {
+        "windwp/nvim-ts-autotag",
+      },
       config = function()
-        require("nvim-autopairs").setup {}
+        require("config.auto-pairs").setup()
       end
     })
 
@@ -100,13 +112,6 @@ function M.setup()
     --   "neovim/nvim-lspconfig",
     -- })
 
-    use({
-      'nvim-treesitter/nvim-treesitter',
-      config = function()
-        require("config.nvim-tree")
-      end
-    })
-
     -- telescope
     use({
       'nvim-telescope/telescope.nvim',
@@ -149,21 +154,25 @@ function M.setup()
     })
 
     use { "kyazdani42/nvim-web-devicons" }
-    use { "kyazdani42/nvim-tree.lua" }
-
-
-
-    if packer_bootstrap then
-      print "Restart Neovim required after installation!"
-      require("packer").sync()
+    use({ "kyazdani42/nvim-tree.lua",
+    config = function ()
+      require("config.nvim-tree")
     end
+  })
+
+
+
+  if packer_bootstrap then
+    print "Restart Neovim required after installation!"
+    require("packer").sync()
   end
+end
 
-  packer_init()
+packer_init()
 
-  local packer = require "packer"
-  packer.init(conf)
-  packer.startup(plugins)
+local packer = require "packer"
+packer.init(conf)
+packer.startup(plugins)
 end
 
 return M

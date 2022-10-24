@@ -15,6 +15,10 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local on_attach = function(client, bufnr)
+  if client.name == "tsserver" then
+    client.resolved_capabilities.document_formatting = false
+  end
+  -- client.resolved_capabilities.document_formatting = false
 
   local opts = { noremap = true, silent = true }
   vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -39,17 +43,16 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.formatting_seq_sync() end, bufopts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting_seq_sync()']]
 
   -- disable lsp code formatting and let null-ls handle
-  client.resolved_capabilities.document_formatting = false
 
 end
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
-    debounce_text_changes = 150,
+  debounce_text_changes = 150,
 }
 
 for _, server in pairs(servers) do
