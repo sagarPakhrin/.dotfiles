@@ -2,7 +2,7 @@ local lspconfig = require("lspconfig")
 
 require("config.lsp.handler").setup()
 
-local servers = { "jsonls", "sumneko_lua", "tsserver", "tailwindcss" }
+local servers = { "jsonls", "sumneko_lua", "tsserver", "tailwindcss", "vscode-json-language-server" }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true

@@ -77,6 +77,7 @@ function M.setup()
     use({ 'tpope/vim-fugitive' })
     use({ 'tpope/vim-surround' })
     use({ 'airblade/vim-gitgutter' })
+    use({ 'lewis6991/gitsigns.nvim' })
     use({ 'tomtom/tcomment_vim' })
 
 
@@ -155,24 +156,34 @@ function M.setup()
 
     use { "kyazdani42/nvim-web-devicons" }
     use({ "kyazdani42/nvim-tree.lua",
-    config = function ()
-      require("config.nvim-tree")
+      config = function()
+        require("config.nvim-tree")
+      end
+    })
+
+    -- Buffer line
+    use({
+      "akinsho/nvim-bufferline.lua",
+      event = "BufReadPre",
+      wants = "nvim-web-devicons",
+      config = function()
+        require("config.bufferline")
+      end,
+    })
+
+
+
+    if packer_bootstrap then
+      print "Restart Neovim required after installation!"
+      require("packer").sync()
     end
-  })
-
-
-
-  if packer_bootstrap then
-    print "Restart Neovim required after installation!"
-    require("packer").sync()
   end
-end
 
-packer_init()
+  packer_init()
 
-local packer = require "packer"
-packer.init(conf)
-packer.startup(plugins)
+  local packer = require "packer"
+  packer.init(conf)
+  packer.startup(plugins)
 end
 
 return M
