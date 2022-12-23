@@ -16,6 +16,7 @@ local on_attach = function(client, bufnr)
       callback = function()
         -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
         vim.lsp.buf.formatting_seq_sync()
+        vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
       end,
     })
   end

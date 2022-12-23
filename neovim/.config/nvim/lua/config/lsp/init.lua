@@ -2,7 +2,7 @@ local lspconfig = require("lspconfig")
 
 require("config.lsp.handler").setup()
 
-local servers = { "jsonls", "sumneko_lua", "tsserver", "tailwindcss", "vscode-json-language-server" }
+local servers = { "jsonls", "sumneko_lua", "tsserver", "tailwindcss", "prismals" }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -85,8 +85,9 @@ end
 -- })
 
 -- Organize import
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  callback = function()
-    vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
-  end,
-})
+-- moved to null-ls
+-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--   callback = function()
+--     vim.lsp.buf.execute_command({ command = "_typescript.organizeImports", arguments = { vim.fn.expand("%:p") } })
+--   end,
+-- })

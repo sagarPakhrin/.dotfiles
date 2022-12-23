@@ -77,8 +77,17 @@ function M.setup()
     use({ 'tpope/vim-fugitive' })
     use({ 'tpope/vim-surround' })
     use({ 'airblade/vim-gitgutter' })
-    use({ 'lewis6991/gitsigns.nvim' })
+    use({
+      'lewis6991/gitsigns.nvim',
+      config = function()
+        require('config.gitsigns')
+      end
+    })
     use({ 'tomtom/tcomment_vim' })
+    -- use({ 'terrortylor/nvim-comment', config = function()
+    --   require('nvim_comment').setup()
+    -- end })
+    --
 
 
     -- LSP stuffs
@@ -140,7 +149,7 @@ function M.setup()
         "hrsh7th/cmp-cmdline",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-calc",
-        "f3fora/cmp-spell",
+        -- "f3fora/cmp-spell",
         "hrsh7th/cmp-emoji",
         {
           "L3MON4D3/LuaSnip",
@@ -154,7 +163,7 @@ function M.setup()
       },
     })
 
-    use { "kyazdani42/nvim-web-devicons" }
+    use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
     use({ "kyazdani42/nvim-tree.lua",
       config = function()
         require("config.nvim-tree")
@@ -169,6 +178,20 @@ function M.setup()
       config = function()
         require("config.bufferline")
       end,
+    })
+
+    -- Markdown
+    use({
+      "iamcco/markdown-preview.nvim",
+      run = function()
+        vim.fn["mkdp#util#install"]()
+      end,
+      ft = "markdown",
+      cmd = { "MarkdownPreview" },
+    })
+    -- Markdown
+    use({
+      "pantharshit00/vim-prisma",
     })
 
 
