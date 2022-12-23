@@ -10,4 +10,18 @@ lsp.ensure_installed({
 
 -- lsp.nvim_workspace()
 
+lsp.configure('sumneko_lua', {
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' },
+      },
+    },
+  }
+})
+
 lsp.setup()
+
