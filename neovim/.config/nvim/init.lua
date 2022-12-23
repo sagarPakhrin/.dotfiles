@@ -1,1 +1,1 @@
-require("plugins").setup()
+require("sagar")
