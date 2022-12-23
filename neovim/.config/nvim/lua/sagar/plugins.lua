@@ -94,6 +94,32 @@ function M.setup()
 
     })
 
+    -- utility plugins
+    use({
+      "windwp/nvim-autopairs",
+      requires = {
+        "windwp/nvim-ts-autotag",
+      },
+    })
+
+    -- Easy motion
+    use({ "easymotion/vim-easymotion" })
+    use({ "andymass/vim-matchup" })
+
+    -- Git
+    use({ 'tpope/vim-surround' })
+    use({ 'airblade/vim-gitgutter' })
+    use({ 'lewis6991/gitsigns.nvim' })
+    use({ 'tomtom/tcomment_vim' })
+    -- Buffer line
+    use({
+      "akinsho/nvim-bufferline.lua",
+      event = "BufReadPre",
+      wants = "nvim-web-devicons",
+    })
+
+
+
 
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
