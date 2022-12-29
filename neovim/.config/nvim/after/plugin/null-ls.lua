@@ -12,7 +12,6 @@ local on_attach = function(client, bufnr)
       buffer = bufnr,
       callback = function()
 
-        vim.lsp.buf.format()
         -- this is not working, client.name is null-ls
         -- if client.name == "tsserver" then
         vim.lsp.buf.execute_command({
@@ -20,6 +19,7 @@ local on_attach = function(client, bufnr)
           arguments = { vim.api.nvim_buf_get_name(0) },
         })
         -- end
+        vim.lsp.buf.format()
 
       end,
     })
