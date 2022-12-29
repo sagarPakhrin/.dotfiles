@@ -1,6 +1,6 @@
 local null_ls = require("null-ls")
 
-  local builtins = null_ls.builtins
+local builtins = null_ls.builtins
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -12,15 +12,15 @@ local on_attach = function(client, bufnr)
       buffer = bufnr,
       callback = function()
 
-        -- this is not working, client.name is null-ls 
+        vim.lsp.buf.format()
+        -- this is not working, client.name is null-ls
         -- if client.name == "tsserver" then
-          vim.lsp.buf.execute_command({ 
-            command = "_typescript.organizeImports",
-            arguments = {vim.api.nvim_buf_get_name(0)}, 
-          })
+        vim.lsp.buf.execute_command({
+          command = "_typescript.organizeImports",
+          arguments = { vim.api.nvim_buf_get_name(0) },
+        })
         -- end
 
-        vim.lsp.buf.format()
       end,
     })
   end
@@ -29,7 +29,7 @@ end
 null_ls.setup({
   debug = false,
   sources = {
-    builtins.formatting.prettier,
+    builtins.formatting.prettier.with({ extra_args = { "--single-quote" } }),
     builtins.formatting.stylua,
     builtins.diagnostics.eslint,
     builtins.completion.spell,

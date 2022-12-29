@@ -9,8 +9,8 @@
 -- end
 --
 -- ColorMyPencils()
-local status_ok, _  = pcall(require, "onedark")
-if not status_ok then
-  return
-end
-vim.cmd.colorscheme('onedark')
+-- local status_ok, _ = pcall(require, "onedark")
+-- if not status_ok then
+--   return
+-- end
+vim.cmd.colorscheme('tokyonight')

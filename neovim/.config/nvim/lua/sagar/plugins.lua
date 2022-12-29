@@ -49,13 +49,16 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  use 'folke/tokyonight.nvim'
+
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
+  -- use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use { 'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup()
     end
   }
+  use({ 'nvim-tree/nvim-web-devicons' })
 
   use({
     'nvim-tree/nvim-tree.lua',
@@ -64,6 +67,7 @@ require('packer').startup(function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   })
+
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -92,12 +96,6 @@ require('packer').startup(function(use)
   use({ 'tpope/vim-surround' })
   use({ 'airblade/vim-gitgutter' })
   use({ 'tomtom/tcomment_vim' })
-  -- Buffer line
-  use({
-    "akinsho/nvim-bufferline.lua",
-    event = "BufReadPre",
-    wants = "nvim-web-devicons",
-  })
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
