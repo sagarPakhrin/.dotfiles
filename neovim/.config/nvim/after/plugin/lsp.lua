@@ -86,6 +86,7 @@ local servers = {
   eslint = {},
   html = {},
   tailwindcss = {},
+  emmet_ls = {},
 
   sumneko_lua = {
     Lua = {

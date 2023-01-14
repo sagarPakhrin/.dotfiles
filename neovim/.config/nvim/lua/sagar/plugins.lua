@@ -87,6 +87,25 @@ require('packer').startup(function(use)
       "windwp/nvim-ts-autotag",
     },
   })
+  -- Buffer line
+  use({
+    "akinsho/nvim-bufferline.lua",
+    event = "BufReadPre",
+    wants = "nvim-web-devicons",
+    config = function()
+      require("bufferline").setup {
+        options = {
+          -- numbers = "none",
+          diagnostics = "nvim_lsp",
+          separator_style = "slant",
+          show_tab_indicators = true,
+          show_buffer_close_icons = false,
+          show_close_icon = true,
+        },
+
+      }
+    end
+  })
 
   -- Easy motion
   use({ "easymotion/vim-easymotion" })
