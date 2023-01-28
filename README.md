@@ -75,3 +75,12 @@ Telescope seems to slow when configurations are added to ignore folders like `no
 sudo apt install fd-find
 sudo apt install ripgrep
 ```
+
+For the web-dev icons to work. You need to install [nerd-fonts](https://github.com/ryanoasis/nerd-fonts#option-3-install-script)
+```bash
+git clone --filter=blob:none --sparse git@github.com:ryanoasis/nerd-fonts
+cd nerd-fonts
+git sparse-checkout add patched-fonts/NerdFontsSymbolsOnly
+./install.sh
+```
+restart the terminal
