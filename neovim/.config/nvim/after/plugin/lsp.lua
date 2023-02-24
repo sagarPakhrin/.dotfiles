@@ -50,7 +50,6 @@ local on_attach = function(client, bufnr)
           })
         end
         vim.lsp.buf.format()
-
       end,
     })
   end
@@ -63,7 +62,6 @@ local on_attach = function(client, bufnr)
     end
 
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -110,8 +108,7 @@ local servers = {
   html = {},
   tailwindcss = {},
   emmet_ls = {},
-
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
