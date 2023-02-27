@@ -161,6 +161,9 @@ require("lazy").setup({
   {
     "tpope/vim-surround",
   },
+  {
+    "github/copilot.vim",
+  },
 }, {})
 
 -- [[ Basic Keymaps ]]
@@ -457,6 +460,11 @@ cmp.setup({
 
 vim.keymap.set("n", "<c-b>", "<cmd>NvimTreeToggle<cr>")
 vim.keymap.set("n", "nt", "<cmd>NvimTreeToggle<cr>")
+
+-- vim.g.copilot_no_tab_map = 1
+
+vim.cmd([[let g:copilot_no_tab_map = v:true ]])
+vim.cmd([[inoremap<silent><script><expr> <C-J> copilot#Accept("\<CR>") ]])
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
