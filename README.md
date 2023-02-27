@@ -85,3 +85,10 @@ git sparse-checkout add patched-fonts/NerdFontsSymbolsOnly
 ./install.sh
 ```
 restart the terminal
+
+## Neovim Key Mappings
+
+### Copilot
+for completion: `ctrl + shift + j` => `<C-J>`
+for Next suggestion: `Alt + ]` => `<M-]>`
+for Previous suggestion: `Alt + [` => `<M-[>`

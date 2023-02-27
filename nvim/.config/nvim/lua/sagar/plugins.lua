@@ -110,7 +110,7 @@ require("lazy").setup({
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
-      pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+      pcall(require("nvim-treesitter.install").update({ with_sync = false }))
     end,
   },
 
@@ -119,9 +119,6 @@ require("lazy").setup({
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      pcall(require("nvim-tree").setup)
-    end,
   },
   -- { import = 'custom.plugins' },
   -- Easy motion
@@ -457,9 +454,6 @@ cmp.setup({
     { name = "luasnip" },
   },
 })
-
-vim.keymap.set("n", "<c-b>", "<cmd>NvimTreeToggle<cr>")
-vim.keymap.set("n", "nt", "<cmd>NvimTreeToggle<cr>")
 
 -- vim.g.copilot_no_tab_map = 1
 
