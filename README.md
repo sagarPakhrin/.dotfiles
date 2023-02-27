@@ -27,6 +27,7 @@ cd ~/.dotfiles
 # setup the symlinks
 stow -vSt ~ bash
 stow -vSt ~ zsh
+stow -vSt ~ nvim
 # ...
 ```
 

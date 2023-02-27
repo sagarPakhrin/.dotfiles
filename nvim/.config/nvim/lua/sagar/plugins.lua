@@ -53,16 +53,6 @@ require("lazy").setup({
 
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     "lewis6991/gitsigns.nvim",
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-      },
-    },
   },
 
   { -- Theme inspired by Atom
@@ -213,6 +203,7 @@ vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc
 vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
 vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
+vim.keymap.set("n", "<leader>sb", require("telescope.builtin").buffers, { desc = "[S]earch [B]uffers" })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -338,6 +329,15 @@ local on_attach = function(client, bufnr)
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
     vim.lsp.buf.format()
+  end, { desc = "Format current buffer with LSP" })
+
+  vim.api.nvim_buf_create_user_command(bufnr, "OrganizeImports", function(_)
+    local params = {
+      command = "_typescript.organizeImports",
+      arguments = { vim.api.nvim_buf_get_name(0) },
+      title = "",
+    }
+    vim.lsp.buf.execute_command(params)
   end, { desc = "Format current buffer with LSP" })
   --
   if client.supports_method("textDocument/formatting") then
