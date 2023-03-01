@@ -51,6 +51,13 @@ require("lazy").setup({
     dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
   },
 
+  -- {
+  --   "folke/which-key.nvim",
+  --   config = function()
+  --     require("which-key").setup({})
+  --   end,
+  --   opts = {},
+  -- },
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     "lewis6991/gitsigns.nvim",
   },
@@ -86,10 +93,17 @@ require("lazy").setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { "numToStr/Comment.nvim",         opts = {} },
+  { "numToStr/Comment.nvim", opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
-  { "nvim-telescope/telescope.nvim", version = "*", dependencies = { "nvim-lua/plenary.nvim" } },
+  {
+    "nvim-telescope/telescope.nvim",
+    version = "*",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
+    },
+  },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -171,6 +185,8 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local lga_actions = require("telescope-live-grep-args.actions")
+
 require("telescope").setup({
   defaults = {
     mappings = {
@@ -179,6 +195,8 @@ require("telescope").setup({
         ["<C-d>"] = false,
         ["<C-j>"] = require("telescope.actions").move_selection_next,
         ["<C-k>"] = require("telescope.actions").move_selection_previous,
+        -- ["<C-k>"] = lga_actions.quote_prompt({ postfix = " --ig " }),
+        ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
       },
     },
   },
@@ -186,6 +204,7 @@ require("telescope").setup({
 
 -- Enable telescope fzf native, if installed
 pcall(require("telescope").load_extension, "fzf")
+pcall(require("telescope").load_extension, "live_grep_args")
 
 -- See `:help telescope.builtin`
 vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
@@ -204,6 +223,12 @@ vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { de
 vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 vim.keymap.set("n", "<leader>sb", require("telescope.builtin").buffers, { desc = "[S]earch [B]uffers" })
+vim.keymap.set(
+  "n",
+  "<leader>si",
+  require("telescope").extensions.live_grep_args.live_grep_args,
+  { desc = "[S]earch [I]inside folders", noremap = true }
+)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -346,15 +371,6 @@ local on_attach = function(client, bufnr)
       group = formattingAuGroup,
       buffer = bufnr,
       callback = function()
-        -- this is causing error while formatting
-        -- if client.name == "tsserver" then
-        --   local params = {
-        --     command = "_typescript.organizeImports",
-        --     arguments = { vim.api.nvim_buf_get_name(0) },
-        --     title = "",
-        --   }
-        --   vim.lsp.buf.execute_command(params)
-        -- end
         vim.lsp.buf.format()
       end,
     })
@@ -430,15 +446,15 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+    -- ["<Tab>"] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   elseif luasnip.expand_or_jumpable() then
+    --     luasnip.expand_or_jump()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
