@@ -6,6 +6,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.nu = true
 vim.o.mouse = "a"
+vim.o.ai = true
 
 -- Make line numbers default
 vim.wo.number = true

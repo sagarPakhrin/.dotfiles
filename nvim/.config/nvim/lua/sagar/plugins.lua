@@ -48,7 +48,12 @@ require("lazy").setup({
 
   { -- Autocompletion
     "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+    },
   },
 
   -- {
@@ -175,6 +180,10 @@ require("lazy").setup({
   {
     "github/copilot.vim",
   },
+  -- {
+  --   "/Users/sagar/Sagar/Projects/stackmaps.nvim",
+  --   dev = true,
+  -- },
 }, {})
 
 -- [[ Basic Keymaps ]]
@@ -428,7 +437,13 @@ mason_lspconfig.setup_handlers({
 
 -- nvim-cmp setup
 local cmp = require("cmp")
+-- setup vscode like
+require("luasnip.loaders.from_vscode").lazy_load()
 local luasnip = require("luasnip")
+
+luasnip.filetype_extend("typescript", {
+  "javascript",
+})
 
 luasnip.config.setup({})
 
@@ -446,15 +461,15 @@ cmp.setup({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
-    -- ["<Tab>"] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   elseif luasnip.expand_or_jumpable() then
-    --     luasnip.expand_or_jump()
-    --   else
-    --     fallback()
-    --   end
-    -- end, { "i", "s" }),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()

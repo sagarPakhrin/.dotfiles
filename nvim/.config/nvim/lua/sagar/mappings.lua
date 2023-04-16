@@ -4,7 +4,7 @@
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- -- Remap for dealing with word wrap
 -- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -13,7 +13,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Better escape using jk in insert and terminal mode
 vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("t", "jk", "<C-\\><C-n>")
-
 
 -- Resizing panes
 vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
@@ -38,15 +37,15 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- pastes without replacing buffer
-vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- copies to clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
 
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>d", '"_d')
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
@@ -56,3 +55,10 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>ev", ":vsp ~/.config/nvim/init.lua<cr>")
+
+local options = { noremap = true, silent = true }
+
+-- Fugitive Setup
+vim.keymap.set("n", "<leader>gd", "<cmd>Gvdiffsplit!<CR>", options)
+vim.keymap.set("n", "<leader>gh", "<cmd>diffget //2<CR>", options)
+vim.keymap.set("n", "<leader>gl", "<cmd>diffget //3<CR>", options)

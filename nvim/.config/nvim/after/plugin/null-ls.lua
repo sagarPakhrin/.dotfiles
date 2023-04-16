@@ -31,7 +31,7 @@ null_ls.setup({
     builtins.formatting.prettier.with({ extra_args = { "--single-quote" } }),
     builtins.formatting.stylua,
     builtins.diagnostics.eslint,
-    builtins.completion.spell,
+    -- builtins.completion.spell,
     builtins.code_actions.eslint,
   },
   -- on_attach = on_attach
