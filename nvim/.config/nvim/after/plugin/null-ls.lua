@@ -28,9 +28,32 @@ local builtins = null_ls.builtins
 null_ls.setup({
   debug = false,
   sources = {
-    builtins.formatting.prettier.with({ extra_args = { "--single-quote" } }),
+    builtins.formatting.prettier.with({
+      extra_args = { "--single-quote" },
+      filetypes = {
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "json",
+        "css",
+        "scss",
+        "html",
+        "vue",
+        "yaml",
+        "markdown",
+      },
+    }),
     builtins.formatting.stylua,
-    builtins.diagnostics.eslint,
+    builtins.diagnostics.eslint.with({
+      condition = function(utils)
+        return utils.root_has_file({
+          ".eslintrc.js",
+          ".eslintrc",
+          ".eslintrc.json",
+          ".eslintrc.cjs",
+        })
+      end,
+    }),
     -- builtins.completion.spell,
     builtins.code_actions.eslint,
   },

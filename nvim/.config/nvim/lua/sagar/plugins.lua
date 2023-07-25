@@ -30,7 +30,8 @@ require("lazy").setup({
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
-  { -- LSP Configuration & Plugins
+  {
+    -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -39,14 +40,19 @@ require("lazy").setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { "j-hui/fidget.nvim", opts = {} },
+      {
+        "j-hui/fidget.nvim",
+        tag = "legacy",
+        opts = {},
+      },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       "folke/neodev.nvim",
     },
   },
 
-  { -- Autocompletion
+  {
+    -- Autocompletion
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -67,7 +73,8 @@ require("lazy").setup({
     "lewis6991/gitsigns.nvim",
   },
 
-  { -- Theme inspired by Atom
+  {
+    -- Theme inspired by Atom
     "navarasu/onedark.nvim",
     priority = 1000,
     config = function()
@@ -75,7 +82,8 @@ require("lazy").setup({
     end,
   },
 
-  { -- Set lualine as statusline
+  {
+    -- Set lualine as statusline
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
@@ -87,7 +95,8 @@ require("lazy").setup({
     },
   },
 
-  { -- Add indentation guides even on blank lines
+  {
+    -- Add indentation guides even on blank lines
     "lukas-reineke/indent-blankline.nvim",
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
@@ -123,7 +132,8 @@ require("lazy").setup({
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  {
+    -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -161,6 +171,11 @@ require("lazy").setup({
           show_tab_indicators = true,
           show_buffer_close_icons = false,
           show_close_icon = true,
+          groups = {
+            items = {
+              require("bufferline.groups").builtin.pinned:with({ icon = "" }),
+            },
+          },
         },
       })
     end,
@@ -438,8 +453,8 @@ mason_lspconfig.setup_handlers({
 -- nvim-cmp setup
 local cmp = require("cmp")
 -- setup vscode like
-require("luasnip.loaders.from_vscode").lazy_load()
 local luasnip = require("luasnip")
+-- require("luasnip.loaders.from_vscode").lazy_load()
 
 luasnip.filetype_extend("typescript", {
   "javascript",
@@ -454,7 +469,7 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ["<C-d>"] = cmp.mapping.scroll_docs( -4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete({}),
     ["<CR>"] = cmp.mapping.confirm({
@@ -473,8 +488,8 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable( -1) then
-        luasnip.jump( -1)
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end

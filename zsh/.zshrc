@@ -119,3 +119,4 @@ source $(brew --prefix nvm)/nvm.sh
 
 
 source /Users/sagar/.docker/init-zsh.sh || true # Added by Docker Desktop
+source "$HOME/.cargo/env"

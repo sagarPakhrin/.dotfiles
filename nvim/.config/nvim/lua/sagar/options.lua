@@ -7,6 +7,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.nu = true
 vim.o.mouse = "a"
 vim.o.ai = true
+vim.o.ci = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -50,6 +51,7 @@ vim.o.breakindent = true
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.filetypeindent = "on"
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
