@@ -1,3 +1,2 @@
-require("sagar.options")
-require("sagar.plugins")
-require("sagar.mappings")
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
