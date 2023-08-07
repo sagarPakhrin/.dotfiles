@@ -3,7 +3,7 @@ return {
     "folke/flash.nvim",
     enabled = true,
     event = "VeryLazy",
-    vscode = true,
+    -- vscode = true,
     ---@type Flash.Config
     -- stylua: ignore
     keys = {
