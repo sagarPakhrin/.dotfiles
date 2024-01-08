@@ -1,6 +1,14 @@
 return {
   {
-    "nvim-pack/nvim-spectre",
+    "ggandor/flit.nvim",
+    enabled = false,
+  },
+  {
+    "rcarriga/nvim-notify",
+    enabled = false,
+  },
+  {
+    "echasnovski/mini.ai",
     enabled = false,
   },
 }
