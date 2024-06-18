@@ -9,6 +9,9 @@ vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in status line
 vim.opt.showmode = false
 
+-- Tabstop will look like 4 spaces
+vim.opt.tabstop = 4
+
 -- vim.opt.clipboard = 'unnamedplus'
 vim.opt.breakindent = true
 

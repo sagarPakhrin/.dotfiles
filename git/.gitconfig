@@ -20,3 +20,5 @@
 
 [diff]
     colorMoved = default
+[rerere]
+	enabled = true

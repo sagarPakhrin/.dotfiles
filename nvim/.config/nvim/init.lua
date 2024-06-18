@@ -83,8 +83,32 @@ require('lazy').setup {
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  -- {
+  --   'numToStr/Comment.nvim',
+  --   dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+  --   opts = {
+  --     pre_hook = function() require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook() end,
+  --   },
+  -- },
+  {
+    'echasnovski/mini.comment',
+    event = 'VeryLazy',
 
+    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require('ts_context_commentstring.internal').calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+    },
+
+    -- opts = {
+    --   custom_commentstring = function()
+    --     return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+    --   end,
+    -- },
+  },
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following lua:
   --    require('gitsigns').setup({ ... })
@@ -253,6 +277,9 @@ require('lazy').setup {
       map('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       map('n', '<leader>,', '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>', { desc = 'Switch Buffer' })
 
+      local default_opts = { noremap = true, silent = true }
+      map('v', '<C-f>', 'y<ESC>:Telescope live_grep default_text=<c-r>0<CR>', default_opts)
+
       -- Slightly advanced example of overriding default behavior and theme
       map('n', '<leader>/', function()
         -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -351,6 +378,30 @@ require('lazy').setup {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          if client and client.name == 'tsserver' then
+            -- This is a special case for tsserver, which has a special code action
+            -- to organize imports. This is a common action, so we add a keymap for it.
+            map('<leader>co', function()
+              vim.lsp.buf.code_action {
+                apply = true,
+                context = {
+                  only = { 'source.organizeImports.ts' },
+                  diagnostics = {},
+                },
+              }
+            end, 'Organize Imports')
+            map('<leader>cR', function()
+              vim.lsp.buf.code_action {
+                apply = true,
+                context = {
+                  only = { 'source.removeUnused.ts' },
+                  diagnostics = {},
+                },
+              }
+            end, 'Remove Unused Imports')
+          end
+
           if client and client.server_capabilities.documentHighlightProvider then
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -392,7 +443,42 @@ require('lazy').setup {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {
+          keys = {
+            {
+              '<leader>co',
+              function()
+                vim.lsp.buf.code_action {
+                  apply = true,
+                  context = {
+                    only = { 'source.organizeImports.ts' },
+                    diagnostics = {},
+                  },
+                }
+              end,
+              desc = 'Organize Imports',
+            },
+            {
+              '<leader>cR',
+              function()
+                vim.lsp.buf.code_action {
+                  apply = true,
+                  context = {
+                    only = { 'source.removeUnused.ts' },
+                    diagnostics = {},
+                  },
+                }
+              end,
+              desc = 'Remove Unused Imports',
+            },
+          },
+          ---@diagnostic disable-next-line: missing-fields
+          settings = {
+            completions = {
+              completeFunctionCalls = true,
+            },
+          },
+        },
         --
 
         lua_ls = {
@@ -454,6 +540,15 @@ require('lazy').setup {
       }
     end,
   },
+  {
+    'nvimtools/none-ls.nvim',
+    optional = true,
+    opts = function(_, opts)
+      local nls = require 'null-ls'
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, nls.builtins.formatting.prettier)
+    end,
+  },
 
   { -- Autoformat
     'stevearc/conform.nvim',
@@ -465,12 +560,29 @@ require('lazy').setup {
       },
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use a sub-list to tell conform to run *until* a formatter
-        -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        -- -- Conform can also run multiple formatters sequentially
+        -- -- python = { "isort", "black" },
+        -- --
+        -- -- You can use a sub-list to tell conform to run *until* a formatter
+        -- -- is found.
+        -- javascript = { { 'prettierd', 'prettier' } },
+        ['javascript'] = { 'prettier' },
+        ['javascriptreact'] = { 'prettier' },
+        ['typescript'] = { 'prettier' },
+        ['typescriptreact'] = { 'prettier' },
+        ['vue'] = { 'prettier' },
+        ['css'] = { 'prettier' },
+        ['scss'] = { 'prettier' },
+        ['less'] = { 'prettier' },
+        ['html'] = { 'prettier' },
+        ['json'] = { 'prettier' },
+        ['jsonc'] = { 'prettier' },
+        ['yaml'] = { 'prettier' },
+        ['markdown'] = { 'prettier' },
+        ['markdown.mdx'] = { 'prettier' },
+        ['graphql'] = { 'prettier' },
+        ['handlebars'] = { 'prettier' },
+        go = { 'goimports', 'gofmt' },
       },
     },
   },
@@ -504,7 +616,7 @@ require('lazy').setup {
       --    you can use this plugin to help you. It even has snippets
       --    for various frameworks/libraries/etc. but you will have to
       --    set up the ones that are useful for you.
-      -- 'rafamadriz/friendly-snippets',
+      'rafamadriz/friendly-snippets',
     },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
@@ -612,20 +724,34 @@ require('lazy').setup {
     },
   },
 
+  -- { -- You can easily change to a different colorscheme.
+  --   -- Change the name of the colorscheme plugin below, and then
+  --   -- change the command in the config to whatever the name of that colorscheme is
+  --   --
+  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
+  --   'folke/tokyonight.nvim',
+  --   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   config = function()
+  --     -- Load the colorscheme here
+  --     vim.cmd.colorscheme 'tokyonight-night'
+  --
+  --     -- You can configure highlights by doing something like
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    'folke/tokyonight.nvim',
+    'rose-pine/neovim',
+    name = 'rose-pine',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
-      -- Load the colorscheme here
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like
-      vim.cmd.hi 'Comment gui=none'
+      vim.cmd.colorscheme 'rose-pine'
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
 
@@ -654,7 +780,7 @@ require('lazy').setup {
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
       require('mini.statusline').setup()
-      ---@diagnostic disable-next-line: undefined-global
+      ---@diagnostic disable-next-line: undefined-global, duplicate-set-field
       MiniStatusline.section_location = function()
         return '%2l:%-2v'
       end
@@ -666,17 +792,62 @@ require('lazy').setup {
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      -- 'nvim-treesitter/nvim-treesitter-refactor',
+      -- 'nvim-treesitter/nvim-treesitter-context',
+    },
     build = ':TSUpdate',
+    -- keys = {
+    --   { '<c-space>', desc = 'Increment selection' },
+    --   { '<bs>', desc = 'Decrement selection', mode = 'x' },
+    -- },
+
     config = function()
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
+        ensure_installed = {
+          'bash',
+          'c',
+          'diff',
+          'html',
+          'javascript',
+          'jsdoc',
+          'json',
+          'jsonc',
+          'lua',
+          'luadoc',
+          'luap',
+          'markdown',
+          'markdown_inline',
+          'python',
+          'query',
+          'regex',
+          'toml',
+          'tsx',
+          'typescript',
+          'vim',
+          'vimdoc',
+          'yaml',
+        },
+        -- ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc', 'javascript', 'typescript' },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
+        auto_pairs = { enable = true },
+        auto_tag = { enable = true },
         indent = { enable = true },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = 'gnn',
+            node_incremental = 'grn',
+            scope_incremental = 'grc',
+            node_decremental = 'grm',
+          },
+        },
       }
 
       -- There are additional nvim-treesitter modules that you can use to interact

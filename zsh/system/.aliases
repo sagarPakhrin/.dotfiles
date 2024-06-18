@@ -8,6 +8,7 @@ alias txe='tmuxinator edit'
 alias vim='nvim'
 alias lg='lazygit'
 alias python='python3'
+alias pip='pip3'
 
 alias nvk='NVIM_APPNAME=nvk nvim' # LazyVim
 alias nvl='NVIM_APPNAME=nvl nvim' # LazyVim
