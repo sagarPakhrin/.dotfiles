@@ -348,6 +348,17 @@ require('lazy').setup({
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
           end
+
+          if client and client.name == 'ts_ls' then
+            -- add organizeImports commands
+            map('<leader>co', function()
+              vim.lsp.buf.execute_command {
+                command = '_typescript.organizeImports',
+                arguments = { vim.api.nvim_buf_get_name(0) },
+                title = '',
+              }
+            end, '[C]ode action [O]rganize Imports')
+          end
         end,
       })
 
@@ -387,7 +398,21 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        ts_ls = {},
+        ts_ls = {
+          commands = {
+            OrganizeImports = {
+              function()
+                local params = {
+                  command = '_typescript.organizeImports',
+                  arguments = { vim.api.nvim_buf_get_name(0) },
+                  title = '',
+                }
+                vim.lsp.buf.execute_command(params)
+              end,
+              description = 'Organize Imports',
+            },
+          },
+        },
         --
 
         lua_ls = {
@@ -404,6 +429,8 @@ require('lazy').setup({
             },
           },
         },
+        prettierd = {},
+        eslint_d = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -465,7 +492,8 @@ require('lazy').setup({
           lsp_format_opt = 'fallback'
         end
         return {
-          timeout_ms = 500,
+          -- timeout_ms = 500,
+          timeout_ms = 1000,
           lsp_format = lsp_format_opt,
         }
       end,
@@ -475,8 +503,34 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        -- javascript = { 'ts_organize_imports', 'prettierd' },
+        -- typescript = { 'ts_organize_imports', 'prettierd' },
       },
+      --#region
+      -- formatters = {
+      --   ts_organize_imports = {
+      --     command = 'ts_ls',
+      --     args = { '--stdio' },
+      --     range_args = function()
+      --       return { '--stdio' }
+      --     end,
+      --     format = function(buf)
+      --       local timeout_ms = 1000
+      --       local params = {
+      --         command = '_typescript.organizeImports',
+      --         arguments = { vim.api.nvim_buf_get_name(buf) },
+      --       }
+      --       local clients = vim.lsp.get_active_clients { bufnr = buf, name = 'tsserver' }
+      --       if #clients > 0 then
+      --         local client = clients[1]
+      --         local result = client.request_sync('workspace/executeCommand', params, timeout_ms, buf)
+      --         return result
+      --       end
+      --       return nil
+      --     end,
+      --   },
+      -- },
+      --#endregion
     },
   },
 
@@ -580,7 +634,7 @@ require('lazy').setup({
           end, { 'i', 's' }),
 
           -- custom
-          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true, behavior = cmp.ConfirmBehavior.Replace },
           ['<S-CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
