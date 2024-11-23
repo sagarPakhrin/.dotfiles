@@ -430,6 +430,7 @@ require('lazy').setup({
           },
         },
         prettierd = {},
+        prettier = {},
         eslint_d = {},
       }
 
@@ -493,7 +494,7 @@ require('lazy').setup({
         end
         return {
           -- timeout_ms = 500,
-          timeout_ms = 1000,
+          timeout_ms = 2000,
           lsp_format = lsp_format_opt,
         }
       end,
@@ -503,34 +504,11 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { 'ts_organize_imports', 'prettierd' },
-        -- typescript = { 'ts_organize_imports', 'prettierd' },
+        javascript = { 'prettierd', 'prettier' },
+        typescript = { 'prettierd', 'prettier' },
+        typescriptreact = { 'prettierd', 'prettier' },
+        javascriptreact = { 'prettierd', 'prettier' },
       },
-      --#region
-      -- formatters = {
-      --   ts_organize_imports = {
-      --     command = 'ts_ls',
-      --     args = { '--stdio' },
-      --     range_args = function()
-      --       return { '--stdio' }
-      --     end,
-      --     format = function(buf)
-      --       local timeout_ms = 1000
-      --       local params = {
-      --         command = '_typescript.organizeImports',
-      --         arguments = { vim.api.nvim_buf_get_name(buf) },
-      --       }
-      --       local clients = vim.lsp.get_active_clients { bufnr = buf, name = 'tsserver' }
-      --       if #clients > 0 then
-      --         local client = clients[1]
-      --         local result = client.request_sync('workspace/executeCommand', params, timeout_ms, buf)
-      --         return result
-      --       end
-      --       return nil
-      --     end,
-      --   },
-      -- },
-      --#endregion
     },
   },
 
